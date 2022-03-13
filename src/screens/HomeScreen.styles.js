@@ -14,9 +14,26 @@ export const InputBlock = styled.div`
     
     font-size: 14px;
     border: 2px solid ${({theme}) => theme.colors.solidGrey};
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
     
     outline: none;
+  }
+  
+  div {
+    cursor:pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 0 15px;
+    
+    border-radius: 0 5px 5px 0;
+    background-color: ${({theme}) => theme.colors.solidGrey};
+    
+    &:hover {
+      border: 1px solid ${({theme}) => theme.colors.black};
+    }
   }
 `
 

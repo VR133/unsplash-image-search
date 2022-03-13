@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
+import {AiOutlineEnter} from 'react-icons/ai'
 import {search} from '../shared/actions/searchActions'
 import Container from '../components/Container/Container'
 import Paginate from '../components/Paginate/Paginate'
@@ -14,9 +15,9 @@ const HomeScreen = () => {
     const dispatch = useDispatch()
 
     const locationSearchParams = new URLSearchParams(window.location.search)
-
     const currentPage = Number(locationSearchParams.get('page') || 1)
     const query = locationSearchParams.get('query') || ''
+
     const [searchQuery, setSearchQuery] = useState(query)
 
     const searchReducer = useSelector(state => state.search)
@@ -24,8 +25,16 @@ const HomeScreen = () => {
 
     const keyDownHandler = (event) => {
         if (event.keyCode === 13) {
-            navigate(`/?query=${searchQuery}`)
+            triggerSearch()
         }
+    }
+
+    const changeHandler = (event) => {
+        setSearchQuery(event.target.value)
+    }
+
+    const triggerSearch = () => {
+        navigate(`/?query=${searchQuery}`)
     }
 
     useEffect(() => {
@@ -34,14 +43,12 @@ const HomeScreen = () => {
         }
     }, [query, currentPage])
 
-    const changeHandler = (event) => {
-        setSearchQuery(event.target.value)
-    }
-
     return <Container>
         <InputBlock>
-            <input type="text" placeholder={'search here ...'} value={searchQuery} onChange={changeHandler}
+            <input type="text" placeholder={'search here ...'} value={searchQuery}
+                   onChange={changeHandler}
                    onKeyDown={keyDownHandler}/>
+            <div onClick={triggerSearch}><AiOutlineEnter /></div>
         </InputBlock>
         <ResultsBlock>
             {loading && <Loader/>}
@@ -50,9 +57,9 @@ const HomeScreen = () => {
                 ? items.map((element) => (
                     <ImageBlock key={element.id} item={element}/>
                 ))
-                : !loading && success
+                : success
                     ? <Message>nothing found :(</Message>
-                    : <Message>try to search something...</Message>
+                    : !loading && <Message>try to search something...</Message>
             }
         </ResultsBlock>
         <Paginate totalPages={totalPages} currentPage={currentPage}/>
