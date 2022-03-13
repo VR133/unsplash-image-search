@@ -1,15 +1,16 @@
 import React from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
-import {defaultTheme} from './shared/styles/Themes.styles'
-import GlobalStyle from './shared/styles/Global.styles'
 import HomeScreen from './screens/HomeScreen'
+import Header from './components/Header/Header'
+import GlobalStyle from './shared/styles/Global.styles'
+import {defaultTheme} from './shared/styles/Themes.styles'
 
 function App() {
     return <ThemeProvider theme={defaultTheme}>
         <GlobalStyle/>
         <BrowserRouter>
-            <div>Header</div>
+            <Header />
             <main>
                 <Routes>
                     <Route path='/' element={<HomeScreen/>}/>
