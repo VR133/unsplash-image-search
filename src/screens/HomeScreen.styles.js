@@ -9,7 +9,7 @@ export const InputBlock = styled.div`
   input {
     width: 80%;
     
-    padding: 5px;
+    padding: 10px;
     background-color: ${({theme}) => theme.colors.solidGrey};
     
     font-size: 14px;
@@ -30,6 +30,8 @@ export const InputBlock = styled.div`
     
     border-radius: 0 5px 5px 0;
     background-color: ${({theme}) => theme.colors.solidGrey};
+    border: 1px solid transparent;
+
     
     &:hover {
       border: 1px solid ${({theme}) => theme.colors.black};
