@@ -40,7 +40,6 @@ export const InputBlock = styled.div`
 `
 
 export const ResultsBlock = styled.div`
-  display: grid;
+  display: grid;  
   margin: 40px 0;
-  justify-content: center;
 `

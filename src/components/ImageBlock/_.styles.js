@@ -8,6 +8,8 @@ export const StyledImageBlock = styled.div`
 
 export const StyledImage = styled.img`
   width: 100%;
+  max-height: 500px;
+  object-fit: cover;
 `
 
 export const StyledUserInfo = styled.div`
