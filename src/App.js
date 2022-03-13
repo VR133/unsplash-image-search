@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import HomeScreen from './screens/HomeScreen'
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import GlobalStyle from './shared/styles/Global.styles'
 import {defaultTheme} from './shared/styles/Themes.styles'
 
@@ -16,7 +17,7 @@ function App() {
                     <Route path='/' element={<HomeScreen/>}/>
                 </Routes>
             </main>
-            <div>Footer</div>
+            <Footer />
         </BrowserRouter>
     </ThemeProvider>
 }
