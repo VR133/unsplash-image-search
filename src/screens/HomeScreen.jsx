@@ -1,28 +1,38 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 import {search} from '../shared/actions/searchActions'
 import Container from '../components/Container/Container'
 import Paginate from '../components/Paginate/Paginate'
 import ImageBlock from '../components/ImageBlock/ImageBlock'
-import {InputBlock, ResultsBlock} from './HomeScreen.styles'
 import Loader from '../components/Loader/Loader'
-import Message from '../components/Message/Message';
+import Message from '../components/Message/Message'
+import {InputBlock, ResultsBlock} from './HomeScreen.styles'
 
 const HomeScreen = () => {
-
+    const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    const [searchQuery, setSearchQuery] = useState('alp')
-    const currentPage = 1
+    const locationSearchParams = new URLSearchParams(window.location.search)
+
+    const currentPage = Number(locationSearchParams.get('page') || 1)
+    const query = locationSearchParams.get('query') || ''
+    const [searchQuery, setSearchQuery] = useState(query)
 
     const searchReducer = useSelector(state => state.search)
     const {loading, items, totalPages, error, success} = searchReducer
 
     const keyDownHandler = (event) => {
         if (event.keyCode === 13) {
-            dispatch(search(searchQuery))
+            navigate(`/?query=${searchQuery}`)
         }
     }
+
+    useEffect(() => {
+        if (searchQuery !== '') {
+            dispatch(search(searchQuery, currentPage))
+        }
+    }, [query, currentPage])
 
     const changeHandler = (event) => {
         setSearchQuery(event.target.value)
@@ -34,7 +44,7 @@ const HomeScreen = () => {
                    onKeyDown={keyDownHandler}/>
         </InputBlock>
         <ResultsBlock>
-            {loading && <Loader />}
+            {loading && <Loader/>}
             {error && <Message error>{error}</Message>}
             {items.length > 0
                 ? items.map((element) => (

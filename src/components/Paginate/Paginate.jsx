@@ -1,7 +1,11 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {PaginationElement, StyledPaginate} from './Paginate.styles'
 
 const Paginate = ({currentPage, totalPages, pagesToShow = 10}) => {
+
+    const locationSearchParams = new URLSearchParams(window.location.search)
+    locationSearchParams.delete('page')
 
     const pages = [...Array(totalPages).keys()];
 
@@ -18,7 +22,7 @@ const Paginate = ({currentPage, totalPages, pagesToShow = 10}) => {
     return totalPages > 1 && (<StyledPaginate>
         {pages.slice(startIndex, stopIndex).map((value, index) => (
             <PaginationElement key={index + value + 1} active={value + 1 === currentPage}>
-                {value + 1}
+                <Link to={`?${locationSearchParams.toString()}&page=${value + 1}`}>{value + 1}</Link>
             </PaginationElement>
         ))}
     </StyledPaginate>)

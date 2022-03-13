@@ -8,7 +8,7 @@ const ImageBlock = ({item}) => {
         <UserInfo user={item.user}/>
         <StyledImage src={item.urls.regular} alt={item.alt_description} />
         <StyledTags>
-            {item.tags.map((tag) => <span>#{tag.title}&nbsp;</span>)}
+            {item.tags.map((tag, index) => <span key={index + tag.title}>#{tag.title}&nbsp;</span>)}
         </StyledTags>
     </StyledImageBlock>;
 };
