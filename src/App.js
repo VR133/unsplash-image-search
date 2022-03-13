@@ -3,18 +3,19 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import {defaultTheme} from './shared/styles/Themes.styles'
 import GlobalStyle from './shared/styles/Global.styles'
+import HomeScreen from './screens/HomeScreen'
 
 function App() {
     return <ThemeProvider theme={defaultTheme}>
-        <GlobalStyle />
+        <GlobalStyle/>
         <BrowserRouter>
-            <main className='py-3'>
-                <div>Header</div>
+            <div>Header</div>
+            <main>
                 <Routes>
-                    <Route path='/' element={<div>salut</div>}/>
+                    <Route path='/' element={<HomeScreen/>}/>
                 </Routes>
-                <div>Footer</div>
             </main>
+            <div>Footer</div>
         </BrowserRouter>
     </ThemeProvider>
 }
