@@ -7,11 +7,6 @@ export const StyledPaginate = styled.div`
 
 export const PaginationElement = styled.div`
   padding: 0 4px;
-  
-  a {
-    color: ${({theme}) => theme.colors.black};
-    text-decoration: none;
-  }
 
   ${({active}) => active && `
     text-decoration: underline;

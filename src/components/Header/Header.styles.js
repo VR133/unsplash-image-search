@@ -7,6 +7,7 @@ export const StyledHeader = styled.header`
   font-weight: bold;
   background-color: ${({theme}) => theme.colors.solidGrey};
   box-shadow: 0px 10px 20px 5px rgba(0,0,0,0.25);
+  font-size: 16px;
   
   & > div {
     display: flex;
@@ -27,11 +28,6 @@ export const Logo = styled.div`
 export const LoginLogOut = styled.div`
   min-width: fit-content;
   margin-left: 10px;
-  
-  a {
-    color: ${({theme}) => theme.colors.black};
-    text-decoration: none;
-  }
   
   &:hover {
     text-decoration: underline;

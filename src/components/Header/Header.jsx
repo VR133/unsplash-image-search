@@ -9,7 +9,9 @@ const Header = () => {
     return <StyledHeader>
         <Container>
             <Logo>
-                <BsSearch/> <span>Find the perfect image!</span>
+                <Link to={'/'}>
+                    <BsSearch/> <span>Find the perfect image!</span>
+                </Link>
             </Logo>
             <LoginLogOut>
                 <AiOutlineUser/> <Link to={'/login'}>Login</Link>
