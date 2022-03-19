@@ -32,5 +32,5 @@ export const InputBlock = styled.div`
 
 export const ResultsBlock = styled.div`
   display: grid;  
-  margin: 40px 0;
+  margin-top: 40px;
 `
