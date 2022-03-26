@@ -4,8 +4,14 @@ import {BsSearch} from 'react-icons/bs'
 import {AiOutlineUser} from 'react-icons/ai'
 import Container from '../Container/Container'
 import {LoginLogOut, Logo, StyledHeader} from './Header.styles'
+import {getUnsplashAuthURL} from '../../shared/utils/unsplash'
 
 const Header = () => {
+
+    const loginHandler = async () => {
+        window.location.href = getUnsplashAuthURL()
+    }
+
     return <StyledHeader>
         <Container>
             <Logo>
@@ -14,7 +20,7 @@ const Header = () => {
                 </Link>
             </Logo>
             <LoginLogOut>
-                <AiOutlineUser/> <Link to={'/login'}>Login</Link>
+                <div onClick={loginHandler}><AiOutlineUser/> Login</div>
             </LoginLogOut>
         </Container>
     </StyledHeader>;

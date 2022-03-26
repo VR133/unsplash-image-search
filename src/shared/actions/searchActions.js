@@ -1,4 +1,4 @@
-import unsplash from '../utils/unsplash'
+import {unsplash} from '../utils/unsplash'
 import {SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_ERROR} from '../constants/searchConstants'
 
 export const search = (query, page = 1, perPage = 10) => async (dispatch) => {
