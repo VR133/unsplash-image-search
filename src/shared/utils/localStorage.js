@@ -15,3 +15,7 @@ export const getFromLocalStorage = (key) => {
 
     return null
 }
+
+export const deleteFromLocalStorage = (key) => {
+    return localStorage.removeItem(`image-search-${key}`)
+}

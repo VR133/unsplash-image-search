@@ -1,5 +1,5 @@
 import {createApi} from 'unsplash-js'
-import {getUserTokenByCode} from '../actions/userActions'
+import {getUserProfile, getUserTokenByCode} from '../actions/userActions'
 
 const unsplash = new createApi({
     apiUrl: process.env.REACT_APP_UNSPLASH_API_URL,
@@ -17,16 +17,15 @@ const getUnsplashAuthURL = () => {
     return `https://unsplash.com/oauth/authorize?client_id=${accessKey}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`
 }
 
-const unsplashAuthHandler = ({dispatch}) => {
-
-    const locationSearchParams = new URLSearchParams(window.location.search)
+const unsplashAuthHandler = async ({dispatch, locationSearchParams, navigate}) => {
     const code = locationSearchParams.get('code') || null
 
     if (code !== null) {
-        dispatch(getUserTokenByCode(code))
+        await dispatch(getUserTokenByCode(code))
+        await dispatch(getUserProfile())
     }
 
-    window.location.href = '/'
+    navigate('/')
 }
 
 export {

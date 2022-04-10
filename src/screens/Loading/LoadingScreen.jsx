@@ -5,13 +5,12 @@ import Loader from '../../components/Loader/Loader'
 import {StyledLoadingScreen} from './LoadingScreen.styles'
 
 const LoadingScreen = ({callbackFunction}) => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     if (typeof callbackFunction === 'function') {
-        callbackFunction({dispatch})
-    } else {
-        navigate('/')
+        const locationSearchParams = new URLSearchParams(window.location.search)
+        callbackFunction({dispatch, locationSearchParams, navigate})
     }
 
     return <StyledLoadingScreen>

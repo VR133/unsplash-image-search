@@ -24,7 +24,7 @@ export const search = (query, page = 1, perPage = 10) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: SEARCH_ERROR,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: error.response && error.response.data.errors ? error.response.data.errors : error.message
         })
     }
 }

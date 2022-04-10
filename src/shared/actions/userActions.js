@@ -1,7 +1,9 @@
 import axios from 'axios'
-import {USER_TOKEN_REQUEST, USER_TOKEN_SUCCESS, USER_TOKEN_FAIL} from '../constants/userConstants'
+import {
+    USER_TOKEN_REQUEST, USER_TOKEN_SUCCESS, USER_TOKEN_FAIL,
+    USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL
+} from '../constants/userConstants'
 import {unsplashRedirectUri} from '../utils/unsplash'
-import {saveToLocalStorage} from '../utils/localStorage';
 
 export const getUserTokenByCode = (code) => async (dispatch) => {
     try {
@@ -9,33 +11,62 @@ export const getUserTokenByCode = (code) => async (dispatch) => {
             type: USER_TOKEN_REQUEST
         })
 
-        const {data} = await axios.post('/oauth/token', {
-            client_id: process.env.REACT_APP_UNSPLASH_ACCESS_KEY,
-            client_secret: process.env.REACT_APP_UNSPLASH_SECRET_KEY,
-            redirect_uri: unsplashRedirectUri,
-            code: code,
-            grant_type: 'authorization_code'
+        const {data} = await axios({
+            url: '/oauth/token',
+            method: 'POST',
+            baseURL: process.env.REACT_APP_UNSPLASH_URL,
+            data: {
+                client_id: process.env.REACT_APP_UNSPLASH_ACCESS_KEY,
+                client_secret: process.env.REACT_APP_UNSPLASH_SECRET_KEY,
+                redirect_uri: unsplashRedirectUri,
+                code: code,
+                grant_type: 'authorization_code'
+            }
         })
 
         dispatch({
             type: USER_TOKEN_SUCCESS,
             payload: {
-                access_token: data.access_token,
-                refresh_token: data.refresh_token,
-                token_type: data.token_type,
+                accessToken: data.access_token,
+                refreshToken: data.refresh_token,
+                tokenType: data.token_type,
             }
-        })
-
-        saveToLocalStorage('userToken', {
-            access_token: data.access_token,
-            refresh_token: data.refresh_token,
-            token_type: data.token_type,
         })
 
     } catch (error) {
         dispatch({
             type: USER_TOKEN_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: error.response && error.response.data.errors ? error.response.data.errors : error.message
+        })
+    }
+}
+
+export const getUserProfile = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_PROFILE_REQUEST
+        })
+
+        const {userToken: {accessToken, tokenType}} = getState()
+
+        const config = {
+            headers: {
+                Authorization: `${tokenType} ${accessToken}`
+            },
+        }
+
+        const {data} = await axios.get('/me', config)
+
+        dispatch({
+            type: USER_PROFILE_SUCCESS,
+            payload: {
+                firstName: data.first_name
+            }
+        })
+    } catch (error) {
+        dispatch({
+            type: USER_PROFILE_FAIL,
+            payload: error.response && error.response.data.errors ? error.response.data.errors : error.message
         })
     }
 }
