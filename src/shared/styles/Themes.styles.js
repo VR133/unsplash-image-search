@@ -9,3 +9,11 @@ export const defaultTheme = {
         viewport: '768px'
     }
 }
+
+const sizes = {
+    tablet: '768px',
+}
+
+export const devices = {
+    tablet: `@media (min-width: ${sizes.tablet})`,
+};

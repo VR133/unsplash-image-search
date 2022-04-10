@@ -1,10 +1,4 @@
-import {createApi} from 'unsplash-js'
 import {getUserProfile, getUserTokenByCode} from '../actions/userActions'
-
-const unsplash = new createApi({
-    apiUrl: process.env.REACT_APP_UNSPLASH_API_URL,
-    accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY
-})
 
 const unsplashRedirectUri = `${window.location.origin}/callback/unsplash`;
 
@@ -27,7 +21,6 @@ const unsplashAuthHandler = async ({dispatch, locationSearchParams}) => {
 }
 
 export {
-    unsplash,
     unsplashRedirectUri,
     getUnsplashAuthURL,
     unsplashAuthHandler,

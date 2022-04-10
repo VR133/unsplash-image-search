@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {devices} from '../../shared/styles/Themes.styles'
 
 export const InputBlock = styled.div` 
   margin-top: 40px;
@@ -8,6 +9,10 @@ export const InputBlock = styled.div`
   
   input {
     width: 80%;
+    
+    ${devices.tablet} {
+      width: 100%;
+    }
   }
   
   div {
