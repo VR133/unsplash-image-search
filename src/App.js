@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {useEffect} from 'react'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
@@ -19,11 +19,11 @@ function App() {
     const dispatch = useDispatch()
     const userToken = useSelector(state => state.userToken)
 
-    useCallback(function () {
+    useEffect(function () {
         if (userToken?.accessToken) {
-            dispatch(getUserProfile())
+            // dispatch(getUserProfile())
         }
-    }, [])
+    }, [userToken])
 
     return <ThemeProvider theme={defaultTheme}>
         <GlobalStyle/>

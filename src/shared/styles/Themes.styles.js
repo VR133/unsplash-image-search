@@ -6,6 +6,6 @@ export const defaultTheme = {
         white: '#FFFFFF'
     },
     width: {
-        viewport: '1320px'
+        viewport: '768px'
     }
 }

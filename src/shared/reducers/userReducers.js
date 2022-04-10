@@ -36,7 +36,7 @@ export const userProfileReducer = (state = {}, action) => {
         case USER_PROFILE_REQUEST:
             deleteFromLocalStorage('userProfile')
 
-            return {loading: true}
+            return {...state, loading: true}
         case USER_PROFILE_SUCCESS:
             saveToLocalStorage('userProfile', {
                 firstName: action.payload.firstName
