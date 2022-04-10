@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
@@ -17,12 +17,13 @@ axios.defaults.baseURL = process.env.REACT_APP_UNSPLASH_API_URL
 function App() {
 
     const dispatch = useDispatch()
-
     const userToken = useSelector(state => state.userToken)
 
-    if (userToken?.accessToken) {
-        dispatch(getUserProfile())
-    }
+    useCallback(function () {
+        if (userToken?.accessToken) {
+            dispatch(getUserProfile())
+        }
+    }, [])
 
     return <ThemeProvider theme={defaultTheme}>
         <GlobalStyle/>

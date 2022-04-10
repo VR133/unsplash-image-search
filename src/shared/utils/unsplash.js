@@ -17,15 +17,13 @@ const getUnsplashAuthURL = () => {
     return `https://unsplash.com/oauth/authorize?client_id=${accessKey}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`
 }
 
-const unsplashAuthHandler = async ({dispatch, locationSearchParams, navigate}) => {
+const unsplashAuthHandler = async ({dispatch, locationSearchParams}) => {
     const code = locationSearchParams.get('code') || null
 
     if (code !== null) {
         await dispatch(getUserTokenByCode(code))
         await dispatch(getUserProfile())
     }
-
-    navigate('/')
 }
 
 export {

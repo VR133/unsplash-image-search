@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import Loader from '../../components/Loader/Loader'
@@ -8,10 +8,14 @@ const LoadingScreen = ({callbackFunction}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    if (typeof callbackFunction === 'function') {
-        const locationSearchParams = new URLSearchParams(window.location.search)
-        callbackFunction({dispatch, locationSearchParams, navigate})
-    }
+    useEffect(async function () {
+        if (typeof callbackFunction === 'function') {
+            const locationSearchParams = new URLSearchParams(window.location.search)
+            await callbackFunction({dispatch, locationSearchParams})
+        }
+
+        navigate('/')
+    }, [])
 
     return <StyledLoadingScreen>
         <Loader/>
