@@ -18,10 +18,10 @@ const UserScreen = () => {
     useEffect(() => {
         if (!userProfile?.firstName) {
             navigate('/')
+        } else {
+            dispatch(getUserLikes())
         }
-
-        dispatch(getUserLikes())
-    }, [])
+    }, [userProfile])
 
     return <Container>
         <Title>Liked images</Title>

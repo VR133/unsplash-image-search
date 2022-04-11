@@ -30,8 +30,10 @@ export const Logo = styled.div`
 export const LoginLogOut = styled.div`
   min-width: fit-content;
   margin-left: 10px;
-  
-  &:hover {
+`
+
+export const Login = styled.div`
+   &:hover {
     text-decoration: underline;
     cursor: pointer;
   }

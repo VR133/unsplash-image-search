@@ -1,10 +1,19 @@
 import {
-    USER_TOKEN_REQUEST, USER_TOKEN_SUCCESS, USER_TOKEN_FAIL,
-    USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL,
-    USER_LIKES_REQUEST, USER_LIKES_SUCCESS, USER_LIKES_FAIL, USER_LIKES_UPDATE
+    USER_TOKEN_REQUEST,
+    USER_TOKEN_SUCCESS,
+    USER_TOKEN_FAIL,
+    USER_PROFILE_REQUEST,
+    USER_PROFILE_SUCCESS,
+    USER_PROFILE_FAIL,
+    USER_LIKES_REQUEST,
+    USER_LIKES_SUCCESS,
+    USER_LIKES_FAIL,
+    USER_LIKES_UPDATE,
+    USER_PROFILE_RESET,
+    USER_LIKES_RESET,
+    USER_TOKEN_RESET
 } from '../constants/userConstants'
 import {deleteFromLocalStorage, saveToLocalStorage} from '../utils/localStorage'
-import {SEARCH_UPDATE_ITEM} from '../constants/searchConstants';
 
 export const userTokenReducer = (state = {}, action) => {
     switch (action.type) {
@@ -27,7 +36,13 @@ export const userTokenReducer = (state = {}, action) => {
                 tokenType: action.payload.tokenType
             }
         case USER_TOKEN_FAIL:
+            deleteFromLocalStorage('userToken')
+
             return {loading: false, errors: action.payload}
+        case USER_TOKEN_RESET:
+            deleteFromLocalStorage('userToken')
+
+            return {}
         default:
             return state
     }
@@ -51,9 +66,13 @@ export const userProfileReducer = (state = {}, action) => {
                 firstName: action.payload.firstName
             }
         case USER_PROFILE_FAIL:
-            deleteFromLocalStorage('userToken')
+            deleteFromLocalStorage('userProfile')
 
             return {loading: false, errors: action.payload}
+        case USER_PROFILE_RESET:
+            deleteFromLocalStorage('userProfile')
+
+            return {}
         default:
             return state
     }
@@ -76,6 +95,8 @@ export const userLikesReducer = (state = {likes: []}, action) => {
                     liked_by_user: item.liked_by_user
                 } : x)
             }
+        case USER_LIKES_RESET:
+            return {likes: []}
         default:
             return state
     }
