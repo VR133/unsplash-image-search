@@ -2,7 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import {searchReducer} from './shared/reducers/searchReducers'
-import {userProfileReducer, userTokenReducer} from './shared/reducers/userReducers'
+import {userLikesReducer, userProfileReducer, userTokenReducer} from './shared/reducers/userReducers'
 import {likeImageReducer, unlikeImageReducer} from './shared/reducers/imageReducers'
 import {getFromLocalStorage} from './shared/utils/localStorage'
 
@@ -12,6 +12,7 @@ const reducer = combineReducers({
     userProfile: userProfileReducer,
     likeImage: likeImageReducer,
     unlikeImage: unlikeImageReducer,
+    userLikes: userLikesReducer,
 })
 
 const initialState = {

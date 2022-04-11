@@ -9,8 +9,6 @@ export const searchReducer = (state = {items: []}, action) => {
         case SEARCH_UPDATE_ITEM:
             const item = action.payload
 
-            console.log(state.items)
-
             return {
                 ...state,
                 items: state.items.map(x => x.id === item.id ? {

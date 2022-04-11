@@ -11,6 +11,7 @@ import {unsplashAuthHandler} from './shared/utils/unsplash'
 import {getUserProfile} from './shared/actions/userActions'
 import GlobalStyle from './shared/styles/Global.styles'
 import {defaultTheme} from './shared/styles/Themes.styles'
+import UserScreen from './screens/User/UserScreen';
 
 axios.defaults.baseURL = process.env.REACT_APP_UNSPLASH_API_URL
 
@@ -33,6 +34,7 @@ function App() {
             <main>
                 <Routes>
                     <Route path='/' element={<HomeScreen/>}/>
+                    <Route path='/user' element={<UserScreen/>}/>
                     <Route path='/callback/unsplash' element={<LoadingScreen callbackFunction={unsplashAuthHandler}/>}/>
                 </Routes>
             </main>

@@ -44,9 +44,12 @@ const ImageBlock = ({item}) => {
                 </StyledActionsBlock>
                 : null}
         </Image>
-        <StyledTags>
-            {item.tags.map((tag, index) => <span key={index + tag.title}>#{tag.title}&nbsp;</span>)}
-        </StyledTags>
+        {item.tags
+            ? (<StyledTags>
+                {item.tags.map((tag, index) => <span key={index + tag.title}>#{tag.title}&nbsp;</span>)}
+            </StyledTags>)
+            : null
+        }
     </StyledImageBlock>;
 };
 

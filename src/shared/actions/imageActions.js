@@ -4,6 +4,7 @@ import {
     UNLIKE_IMAGE_FAIL, UNLIKE_IMAGE_REQUEST, UNLIKE_IMAGE_SUCCESS
 } from '../constants/imageConstants'
 import {SEARCH_UPDATE_ITEM} from '../constants/searchConstants'
+import {USER_LIKES_UPDATE} from '../constants/userConstants'
 
 export const like = (id) => async (dispatch, getState) => {
     try {
@@ -30,6 +31,10 @@ export const like = (id) => async (dispatch, getState) => {
             payload: data.photo
         })
 
+        dispatch({
+            type: USER_LIKES_UPDATE,
+            payload: data.photo
+        })
     } catch (error) {
         dispatch({
             type: LIKE_IMAGE_FAIL,
@@ -62,6 +67,12 @@ export const unlike = (id) => async (dispatch, getState) => {
             type: SEARCH_UPDATE_ITEM,
             payload: data.photo
         })
+
+        dispatch({
+            type: USER_LIKES_UPDATE,
+            payload: data.photo
+        })
+
     } catch (error) {
         dispatch({
             type: UNLIKE_IMAGE_FAIL,

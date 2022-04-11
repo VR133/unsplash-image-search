@@ -1,7 +1,8 @@
 import axios from 'axios'
 import {
     USER_TOKEN_REQUEST, USER_TOKEN_SUCCESS, USER_TOKEN_FAIL,
-    USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL
+    USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL,
+    USER_LIKES_REQUEST, USER_LIKES_SUCCESS, USER_LIKES_FAIL
 } from '../constants/userConstants'
 import {unsplashRedirectUri} from '../utils/unsplash'
 
@@ -60,12 +61,41 @@ export const getUserProfile = () => async (dispatch, getState) => {
         dispatch({
             type: USER_PROFILE_SUCCESS,
             payload: {
-                firstName: data.first_name
+                username: data.username,
+                firstName: data.first_name,
             }
         })
     } catch (error) {
         dispatch({
             type: USER_PROFILE_FAIL,
+            payload: error.response && error.response.data.errors ? error.response.data.errors : error.message
+        })
+    }
+}
+
+export const getUserLikes = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_LIKES_REQUEST
+        })
+
+        const {userToken: {accessToken, tokenType}, userProfile: {username}} = getState()
+
+        const config = {
+            headers: {
+                Authorization: `${tokenType} ${accessToken}`
+            },
+        }
+
+        const {data} = await axios.get(`/users/${username}/likes`, config)
+
+        dispatch({
+            type: USER_LIKES_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: USER_LIKES_FAIL,
             payload: error.response && error.response.data.errors ? error.response.data.errors : error.message
         })
     }
