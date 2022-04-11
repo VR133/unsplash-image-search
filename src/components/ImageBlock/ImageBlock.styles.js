@@ -50,12 +50,12 @@ export const LikeUnlikeButton = styled.div`
   
   opacity: 0.75;
   
+  transition: opacity 0.1s linear;
+  will-change: opacity;
+  
   &:hover {
     opacity: 1;
   }
-  
-  transition: opacity 0.1s linear;
-  will-change: opacity;
   
   svg {
     width: 25px;

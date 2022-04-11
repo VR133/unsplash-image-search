@@ -21,6 +21,7 @@ function App() {
 
     useEffect(function () {
         if (userToken?.accessToken) {
+            // TODO: uncomment this
             // dispatch(getUserProfile())
         }
     }, [userToken])
