@@ -14,6 +14,11 @@ import {defaultTheme} from './shared/styles/Themes.styles'
 import UserScreen from './screens/User/UserScreen';
 
 axios.defaults.baseURL = process.env.REACT_APP_UNSPLASH_API_URL
+axios.defaults.headers = {
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+    'Expires': '0',
+}
 
 function App() {
 

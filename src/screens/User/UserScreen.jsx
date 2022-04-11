@@ -2,9 +2,10 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import Container from '../../components/Container/Container'
-import {Title} from './UserScreen.styles'
-import {getUserLikes} from '../../shared/actions/userActions';
-import ImageBlock from '../../components/ImageBlock/ImageBlock';
+import ImageBlock from '../../components/ImageBlock/ImageBlock'
+import Loader from '../../components/Loader/Loader'
+import {getUserLikes} from '../../shared/actions/userActions'
+import {CenterLoading, Title} from './UserScreen.styles'
 
 const UserScreen = () => {
 
@@ -12,7 +13,7 @@ const UserScreen = () => {
     const dispatch = useDispatch()
 
     const userProfile = useSelector(state => state.userProfile)
-    const {likes} = useSelector(state => state.userLikes)
+    const {likes, loading} = useSelector(state => state.userLikes)
 
     useEffect(() => {
         if (!userProfile?.firstName) {
@@ -24,7 +25,9 @@ const UserScreen = () => {
 
     return <Container>
         <Title>Liked images</Title>
-        {likes.map(e => <ImageBlock key={e.id} item={e}/>)}
+        {loading
+            ? <CenterLoading><Loader/></CenterLoading>
+            : likes.map(e => <ImageBlock key={e.id} item={e}/>)}
     </Container>;
 };
 
