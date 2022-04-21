@@ -1,10 +1,18 @@
-import {SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAIL} from '../constants/searchConstants'
+import {
+    SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAIL,
+    SEARCH_QUERY_ADD_NEW
+} from '../constants/searchConstants'
 import axios from 'axios';
 
 export const search = (query, page = 1, perPage = 10) => async (dispatch, getState) => {
     try {
         dispatch({
             type: SEARCH_REQUEST
+        })
+
+        dispatch({
+            type: SEARCH_QUERY_ADD_NEW,
+            payload: query
         })
 
         const {userToken} = getState()

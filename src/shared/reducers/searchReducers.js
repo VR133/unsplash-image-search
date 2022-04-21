@@ -1,4 +1,8 @@
-import {SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAIL, SEARCH_UPDATE_ITEM} from '../constants/searchConstants'
+import {
+    SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAIL, SEARCH_UPDATE_ITEM,
+    SEARCH_QUERY_ADD_NEW
+} from '../constants/searchConstants'
+import {saveToLocalStorage} from '../utils/localStorage';
 
 export const searchReducer = (state = {items: []}, action) => {
     switch (action.type) {
@@ -18,6 +22,31 @@ export const searchReducer = (state = {items: []}, action) => {
             }
         case SEARCH_FAIL:
             return {loading: false, errors: action.payload, items: []}
+        default:
+            return state
+    }
+}
+
+export const searchQueryReducer = (state = {items: []}, action) => {
+    switch (action.type) {
+        case SEARCH_QUERY_ADD_NEW:
+
+            let items = state.items
+            const existingQuery = items.find(q => q === action.payload)
+
+            if (existingQuery !== undefined) {
+                items = items.filter(q => q !== existingQuery)
+            } else if (items.length === 5) {
+                items.pop()
+            }
+
+            items.unshift(action.payload)
+
+            saveToLocalStorage('searchQueryItems', items)
+
+            return {
+                items
+            }
         default:
             return state
     }
