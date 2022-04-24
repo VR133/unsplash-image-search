@@ -1,12 +1,16 @@
 import styled from 'styled-components'
+import {devices} from '../../../../shared/styles/Themes.styles'
 
 export const InputBlock = styled.div` 
   display: flex;
   justify-content: center;
   position: relative;
-  
-  width: 80vw;
   margin: 40px auto 0;
+  width: 80%;
+      
+  ${devices.tablet} {
+    width: 100%;
+  } 
 `
 
 export const StyledSearchInput = styled.div` 
