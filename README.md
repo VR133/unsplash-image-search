@@ -4,6 +4,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Functionality
+
+1) Image retrieval (search)
+    - remembers previous  search queries in localstorage (no duplicates)
+    - suggests from las 5 search query as an autocomplete dropdown (filtered)
+2) User Authentication Workflow
+    - login/logout
+    - like/unlike images
+    - see liked images
+    
 ## Project setup
 
 Use the following steps after you successfully cloned the repository
