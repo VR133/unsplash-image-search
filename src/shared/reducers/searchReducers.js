@@ -32,15 +32,15 @@ export const searchQueryReducer = (state = {items: []}, action) => {
         case SEARCH_QUERY_ADD_NEW:
 
             let items = state.items
-            const existingQuery = items.find(q => q === action.payload)
+            const existingQuery = items.find(q => q.text === action.payload)
 
             if (existingQuery !== undefined) {
-                items = items.filter(q => q !== existingQuery)
+                items = items.filter(q => q.text !== existingQuery.text)
             } else if (items.length === 5) {
                 items.pop()
             }
 
-            items.unshift(action.payload)
+            items.unshift({id: Date.now(), text: action.payload})
 
             saveToLocalStorage('searchQueryItems', items)
 
