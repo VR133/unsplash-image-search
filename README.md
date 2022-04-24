@@ -9,10 +9,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Use the following steps after you successfully cloned the repository
 1) Run `npm run i` to install all used packages
 2) Create a `.env` file in the main directory, the file should include:
-- `REACT_APP_UNSPLASH_URL` (default: `https://unsplash.com`)
-- `REACT_APP_UNSPLASH_API_URL` (default: `https://api.unsplash.com`)
-- `REACT_APP_UNSPLASH_ACCESS_KEY` - your unsplash access key
-- `REACT_APP_UNSPLASH_SECRET_KEY` - your unsplash secret key
+    - `REACT_APP_UNSPLASH_URL` (default: `https://unsplash.com`)
+    - `REACT_APP_UNSPLASH_API_URL` (default: `https://api.unsplash.com`)
+    - `REACT_APP_UNSPLASH_ACCESS_KEY` - your unsplash access key
+    - `REACT_APP_UNSPLASH_SECRET_KEY` - your unsplash secret key
 
 ## Available Scripts
 
