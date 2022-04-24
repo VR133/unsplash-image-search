@@ -1,45 +1,89 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {search} from '../../../../shared/actions/searchActions'
 import {AiOutlineEnter} from 'react-icons/ai'
-import {InputBlock} from './SearchInput.styles'
+import {StyledSearchInput, SearchBtn, Suggestions, InputBlock} from './SearchInput.styles'
 
 const SearchInput = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const locationSearchParams = new URLSearchParams(window.location.search)
     const currentPage = Number(locationSearchParams.get('page') || 1)
     const query = locationSearchParams.get('query') || ''
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
-    const [searchQuery, setSearchQuery] = useState(query)
+    const [inputValue, setInputValue] = useState(query)
+    const [filteredSuggestions, setFilteredSuggestions] = useState([])
 
-    const triggerSearch = () => {
-        navigate(`/?query=${searchQuery}`)
-    }
+    const searchQueryReducer = useSelector(state => state.searchQuery)
+    const {items: searchQuerySuggestions} = searchQueryReducer
 
     const changeHandler = (event) => {
-        setSearchQuery(event.target.value)
+        setInputValue(event.target.value)
+
+        const suggestions = event.target.value.length !== 0
+            ? searchQuerySuggestions.filter((item) => item.text.includes(event.target.value))
+            : searchQuerySuggestions
+
+        setFilteredSuggestions(suggestions)
     }
 
-    const keyDownHandler = (event) => {
-        if (event.keyCode === 13) {
+    const triggerSearch = () => {
+        navigate(`/?query=${inputValue}`)
+    }
+
+    const showSuggestions = () => {
+        setFilteredSuggestions(searchQuerySuggestions)
+    }
+
+    const hideSuggestions = () => {
+        setFilteredSuggestions([])
+    }
+
+    const inputKeyDownHandler = (event) => {
+        if (event.key === 'Enter') {
             triggerSearch()
         }
     }
 
+    const suggestionMouseDownHandler = (item) => {
+        setInputValue(item.text)
+        triggerSearch()
+    }
+
     useEffect(() => {
-        if (searchQuery !== '') {
-            dispatch(search(searchQuery, currentPage))
+        if (inputValue !== '') {
+            dispatch(search(inputValue, currentPage))
         }
     }, [query, currentPage])
 
     return <InputBlock>
-        <input type="text" placeholder={'search here ...'} value={searchQuery}
-               onChange={changeHandler}
-               onKeyDown={keyDownHandler}/>
-        <div onClick={triggerSearch}><AiOutlineEnter/></div>
-    </InputBlock>;
+        <StyledSearchInput roundedBottom={!filteredSuggestions.length}>
+            <input
+                type="text"
+                placeholder={'search here ...'}
+                value={inputValue}
+                onChange={changeHandler}
+                onKeyDown={inputKeyDownHandler}
+                onFocus={showSuggestions}
+                onBlur={hideSuggestions}
+            />
+        </StyledSearchInput>
+        <SearchBtn onClick={triggerSearch} roundedBottom={!filteredSuggestions.length}>
+            <AiOutlineEnter/>
+        </SearchBtn>
+        {filteredSuggestions.length
+            ? (<Suggestions>
+                {filteredSuggestions.map(item => <div
+                    key={item.id}
+                    onMouseDown={() => suggestionMouseDownHandler(item)}>
+                    {item.text}
+                </div>)}
+            </Suggestions>)
+            : null
+        }
+    </InputBlock>
 };
 
 export default SearchInput

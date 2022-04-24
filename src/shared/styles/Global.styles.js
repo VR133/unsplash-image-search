@@ -31,7 +31,6 @@ input {
     
   font-size: 14px;
   border: 2px solid ${({theme}) => theme.colors.solidGrey};
-  border-radius: 5px 0 0 5px;
   
   outline: none;
 }
