@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {devices} from '../../shared/styles/Themes.styles'
+import {devices} from '../../../../shared/styles/Themes.styles'
 
 export const InputBlock = styled.div` 
   margin-top: 40px;
@@ -33,9 +33,4 @@ export const InputBlock = styled.div`
       border: 1px solid ${({theme}) => theme.colors.black};
     }
   }
-`
-
-export const ResultsBlock = styled.div`
-  display: grid;  
-  margin-top: 40px;
 `
