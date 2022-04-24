@@ -18,7 +18,7 @@ Use the following steps after you successfully cloned the repository
 
 In the project directory, you can run:
 
-### `npm run start`npm
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
