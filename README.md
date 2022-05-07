@@ -23,6 +23,8 @@ Use the following steps after you successfully cloned the repository
     - `REACT_APP_UNSPLASH_API_URL` (default: `https://api.unsplash.com`)
     - `REACT_APP_UNSPLASH_ACCESS_KEY` - your unsplash access key
     - `REACT_APP_UNSPLASH_SECRET_KEY` - your unsplash secret key
+    
+Initially project was running on `node v16.13.1`
 
 ## Available Scripts
 
