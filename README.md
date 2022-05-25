@@ -1,8 +1,11 @@
-# Unsplash API Integration [Demo](https://unsplash-api-integration.herokuapp.com/)
+# Unsplash API Integration
 
 ![Preview](./preview.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Try it
+https://unsplash-api-integration.herokuapp.com/
 
 ## Functionality
 
