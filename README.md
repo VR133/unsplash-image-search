@@ -26,6 +26,7 @@ Use the following steps after you successfully cloned the repository
     
 Initially project was running on `node v16.13.1`
 
+Unsplash callback is `/callback/unsplash`
 ## Available Scripts
 
 In the project directory, you can run:
